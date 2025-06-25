@@ -1,20 +1,55 @@
-<<<<<<< HEAD
-# Weather-App
-=======
-# responsive_ui
+# Weather App
 
-A new Flutter project.
+A Flutter-based weather application that allows users to search for and view the current weather and 7-day forecast for any city worldwide. The app features a clean, responsive UI and robust error handling.
+
+## Features
+
+- Search for weather by city name.
+- View current weather conditions, including temperature, weather status, and more.
+- 7-day weather forecast.
+- Responsive and attractive UI for all device sizes.
+- Error handling for invalid city names and network issues.
+
+## Screenshots
+
+> Add screenshots of your app here.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1. Make sure you have [Flutter](https://flutter.dev/docs/get-started/install) installed.
+2. Clone the repository:
+   ```sh
+   git clone https://github.com/your-username/weather_app.git
+   ```
+3. Navigate to the project directory:
+   ```sh
+   cd weather_app
+   ```
+4. Install dependencies:
+   ```sh
+   flutter pub get
+   ```
+5. Run the app:
+   ```sh
+   flutter run
+   ```
 
-A few resources to get you started if this is your first Flutter project:
+## Project Structure
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- `lib/` : Main application code (screens, cubits, models, etc.)
+- `android/`, `ios/`, `web/`, `windows/`, `macos/`, `linux/` : Platform-specific files.
+- `test/` : Unit tests.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
->>>>>>> 875f241 (Initial commit)
+## Dependencies
+
+- [flutter_bloc](https://pub.dev/packages/flutter_bloc)
+- [http](https://pub.dev/packages/http)
+- [weatherapi.com](https://www.weatherapi.com/) API
+
+## Contributing
+
+Contributions are welcome! Please open issues or submit pull requests.
+
+## License
+
+This project is licensed under the MIT License.
