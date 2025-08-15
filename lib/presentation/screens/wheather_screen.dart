@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_ui/presentation/widgets/weather_card.dart';
-import 'package:responsive_ui/cubits/wheather_cubit.dart';
-import 'package:responsive_ui/cubits/wheather_state.dart';
+import 'package:responsive_ui/presentation/controllers/cubits/wheather_cubit.dart';
+import 'package:responsive_ui/presentation/controllers/cubits/wheather_state.dart';
 
 class WheatherScreen extends StatelessWidget {
   WheatherScreen({super.key});
