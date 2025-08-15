@@ -9,8 +9,12 @@ part 'remote_data_source.g.dart';
 abstract class RemoteDataSource {
   factory RemoteDataSource(Dio dio, {String baseUrl}) = _RemoteDataSource;
 
-  @GET(
-    '${AppConstants.kWeatherApiEndpoint}?key=${AppConstants.kWeatherApiKey}&q={cityName}&${AppConstants.kFixedWeatherApiQueryParam}',
-  )
-  Future<WeatherModel> fetchWeatherDataFromApi(@Query('q') String cityName);
+  @GET(AppConstants.kWeatherApiEndpoint)
+  Future<WeatherModel> fetchWeatherDataFromApi(
+    @Query('key') String apiKey,
+    @Query('q') String cityName,
+    @Query('days') int days,
+    @Query('aqi') String aqi,
+    @Query('alerts') String alerts,
+  );
 }

@@ -20,16 +20,28 @@ class _RemoteDataSource implements RemoteDataSource {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<WeatherModel> fetchWeatherDataFromApi(String cityName) async {
+  Future<WeatherModel> fetchWeatherDataFromApi(
+    String apiKey,
+    String cityName,
+    int days,
+    String aqi,
+    String alerts,
+  ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'q': cityName};
+    final queryParameters = <String, dynamic>{
+      r'key': apiKey,
+      r'q': cityName,
+      r'days': days,
+      r'aqi': aqi,
+      r'alerts': alerts,
+    };
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<WeatherModel>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'forecast.json?key=005280c3705048a8aef181748251206&q={cityName}&&days=7&aqi=no&alerts=no',
+            'forecast.json',
             queryParameters: queryParameters,
             data: _data,
           )
