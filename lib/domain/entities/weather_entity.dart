@@ -1,4 +1,4 @@
-class WeatherModel {
+class WeatherEntity {
   final String areaName;
   final String date;
   final String time;
@@ -8,7 +8,7 @@ class WeatherModel {
   final String weatherState;
   final String icon;
 
-  WeatherModel({
+  WeatherEntity({
     required this.areaName,
     required this.date,
     required this.time,
@@ -19,8 +19,8 @@ class WeatherModel {
     required this.icon,
   });
 
-  factory WeatherModel.fromJson(Map<String, dynamic> json) {
-    return WeatherModel(
+  factory WeatherEntity.fromJson(Map<String, dynamic> json) {
+    return WeatherEntity(
       areaName: json['location']['name'],
       date: formatDate(DateTime.parse(json['location']['localtime'])),
       time: formatTime(DateTime.parse(json['location']['localtime'])),

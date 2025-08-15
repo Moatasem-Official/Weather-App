@@ -1,4 +1,4 @@
-import 'package:responsive_ui/model/weather_model.dart';
+import 'package:responsive_ui/domain/entities/weather_entity.dart';
 
 sealed class WeatherState {}
 
@@ -7,7 +7,7 @@ class WeatherInitial extends WeatherState {}
 class WeatherLoading extends WeatherState {}
 
 class WeatherLoaded extends WeatherState {
-  final WeatherModel weatherModel;
+  final WeatherEntity weatherModel;
   WeatherLoaded(this.weatherModel);
 }
 
