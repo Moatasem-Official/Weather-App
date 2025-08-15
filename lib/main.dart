@@ -22,9 +22,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => getIt.get<WeatherCubit>(),
       child: MaterialApp(
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        ),
+        theme: ThemeData(fontFamily: 'Poppins'),
         home: WheatherScreen(),
         debugShowCheckedModeBanner: false,
       ),
