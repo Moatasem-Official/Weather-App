@@ -1,27 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:responsive_ui/domain/entities/weather_entity.dart';
 
 class WeatherCard extends StatelessWidget {
-  final String city;
-  final String date;
-  final String time;
-  final String minTemp;
-  final String maxTemp;
-  final String currentTemp;
-  final String weatherStatus;
-  final String weatherIcon;
+  final WeatherEntity weatherEntity;
 
-  const WeatherCard({
-    super.key,
-    required this.city,
-    required this.date,
-    required this.time,
-    required this.minTemp,
-    required this.maxTemp,
-    required this.currentTemp,
-    required this.weatherStatus,
-    required this.weatherIcon,
-  });
+  const WeatherCard({super.key, required this.weatherEntity});
 
   @override
   Widget build(BuildContext context) {
@@ -31,23 +15,23 @@ class WeatherCard extends StatelessWidget {
       margin: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         color:
-            weatherStatus.contains('Cloud')
+            weatherEntity.weatherState.contains('Cloud')
                 ? Colors.grey
-                : weatherStatus.contains('rain')
+                : weatherEntity.weatherState.contains('rain')
                 ? const Color.fromARGB(255, 156, 193, 223)
-                : weatherStatus.contains('Snow')
+                : weatherEntity.weatherState.contains('Snow')
                 ? const Color.fromARGB(255, 226, 205, 205)
-                : weatherStatus.contains('Clear')
+                : weatherEntity.weatherState.contains('Clear')
                 ? Colors.blue
-                : weatherStatus.contains('Thunderstorm')
+                : weatherEntity.weatherState.contains('Thunderstorm')
                 ? const Color.fromARGB(255, 54, 51, 51)
-                : weatherStatus.contains('Drizzle')
+                : weatherEntity.weatherState.contains('Drizzle')
                 ? Colors.purple
-                : weatherStatus.contains('Overcast')
+                : weatherEntity.weatherState.contains('Overcast')
                 ? Colors.blueGrey
-                : weatherStatus.contains('Thunder')
+                : weatherEntity.weatherState.contains('Thunder')
                 ? Colors.black
-                : weatherStatus.contains('Sunny')
+                : weatherEntity.weatherState.contains('Sunny')
                 ? Colors.yellow
                 : Colors.red,
         borderRadius: BorderRadius.circular(10),
@@ -58,7 +42,7 @@ class WeatherCard extends StatelessWidget {
           Column(
             children: [
               Text(
-                city,
+                weatherEntity.areaName,
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -66,11 +50,11 @@ class WeatherCard extends StatelessWidget {
                 ),
               ),
               Text(
-                date,
+                weatherEntity.date,
                 style: const TextStyle(color: Colors.white, fontSize: 16),
               ),
               Text(
-                time,
+                weatherEntity.time,
                 style: const TextStyle(color: Colors.white, fontSize: 16),
               ),
             ],
@@ -86,14 +70,14 @@ class WeatherCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Max Temp : ${maxTemp.toString()} °C',
+                          'Max Temp : ${weatherEntity.maxTemp.toString()} °C',
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                           ),
                         ),
                         Text(
-                          'Min Temp : ${minTemp.toString()} °C',
+                          'Min Temp : ${weatherEntity.minTemp.toString()} °C',
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -102,7 +86,7 @@ class WeatherCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Expanded(child: Image.network(weatherIcon)),
+                  Expanded(child: Image.network(weatherEntity.icon)),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -115,7 +99,7 @@ class WeatherCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '${currentTemp.toString()} °C',
+                          '${weatherEntity.theTemp.toString()} °C',
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -129,7 +113,7 @@ class WeatherCard extends StatelessWidget {
             ),
           ),
           Text(
-            weatherStatus,
+            weatherEntity.weatherState,
             style: const TextStyle(
               color: Colors.white,
               fontSize: 24,

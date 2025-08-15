@@ -7,14 +7,14 @@ part of 'weather_model.dart';
 // **************************************************************************
 
 WeatherModel _$WeatherModelFromJson(Map<String, dynamic> json) => WeatherModel(
-  areaName: json['areaName'] as String,
-  date: json['date'] as String,
-  time: json['time'] as String,
-  minTemp: json['minTemp'] as String,
-  maxTemp: json['maxTemp'] as String,
-  theTemp: json['theTemp'] as String,
-  weatherState: json['weatherState'] as String,
-  icon: json['icon'] as String,
+  areaName: json['location']['name'] as String,
+  date: json['forecast']['forecastday'][0]['date'] as String,
+  time: json['location']['localtime'] as String,
+  minTemp: json['forecast']['forecastday'][0]['day']['mintemp_c'].toString(),
+  maxTemp: json['forecast']['forecastday'][0]['day']['maxtemp_c'].toString(),
+  theTemp: json['current']['temp_c'].toString(),
+  weatherState: json['current']['condition']['text'] as String,
+  icon: "https:${json['current']['condition']['icon']}",
 );
 
 Map<String, dynamic> _$WeatherModelToJson(WeatherModel instance) =>

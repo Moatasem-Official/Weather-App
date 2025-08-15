@@ -12,8 +12,8 @@ class WeatherDataRepo implements WeatherDomainRepo {
     required String cityName,
   }) async {
     return await remoteDataSource.fetchWeatherDataFromApi(
-      cityName,
       AppConstants.kWeatherApiKey,
+      cityName,
       7,
       'no',
       'no',

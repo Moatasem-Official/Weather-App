@@ -4,9 +4,14 @@ import 'package:responsive_ui/presentation/widgets/weather_card.dart';
 import 'package:responsive_ui/presentation/controllers/cubits/wheather_cubit.dart';
 import 'package:responsive_ui/presentation/controllers/cubits/wheather_state.dart';
 
-class WheatherScreen extends StatelessWidget {
-  WheatherScreen({super.key});
+class WheatherScreen extends StatefulWidget {
+  const WheatherScreen({super.key});
 
+  @override
+  State<WheatherScreen> createState() => _WheatherScreenState();
+}
+
+class _WheatherScreenState extends State<WheatherScreen> {
   var searchValue = '';
 
   @override
@@ -88,14 +93,7 @@ class WheatherScreen extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
                           child: WeatherCard(
-                            city: state.weatherModel.areaName,
-                            date: state.weatherModel.date,
-                            time: state.weatherModel.time,
-                            maxTemp: state.weatherModel.maxTemp,
-                            minTemp: state.weatherModel.minTemp,
-                            currentTemp: state.weatherModel.theTemp,
-                            weatherStatus: state.weatherModel.weatherState,
-                            weatherIcon: state.weatherModel.icon,
+                            weatherEntity: state.weatherEntity,
                           ),
                         ),
                       )
@@ -114,33 +112,6 @@ class WheatherScreen extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                      : state is WeatherWrongCity
-                      ? Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.network(
-                              'https://img.freepik.com/free-vector/404-error-with-robot-concept-illustration_335657-2330.jpg?w=2000',
-                              width: 300,
-                              height: 300,
-                            ),
-                            const Text(
-                              'Wrong Searched City',
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const Text(
-                              'You Can Search For A City',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey,
                               ),
                             ),
                           ],
