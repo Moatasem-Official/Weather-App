@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:responsive_ui/presentation/widgets/initial_search_widget.dart';
+import 'package:responsive_ui/presentation/widgets/search_error_widget.dart';
 import 'package:responsive_ui/presentation/widgets/weather_card.dart';
 import 'package:responsive_ui/presentation/controllers/cubits/wheather_cubit.dart';
 import 'package:responsive_ui/presentation/controllers/cubits/wheather_state.dart';
@@ -40,7 +42,7 @@ class _WheatherScreenState extends State<WheatherScreen> {
                   hintText: 'Search for a city',
                   prefixIcon: Icon(Icons.search),
                 ),
-                onChanged: (value) async {
+                onSubmitted: (value) async {
                   searchValue = value.trim();
                   if (searchValue.isEmpty) {
                     context.read<WeatherCubit>().reset();
@@ -64,35 +66,7 @@ class _WheatherScreenState extends State<WheatherScreen> {
               BlocBuilder<WeatherCubit, WeatherState>(
                 builder: (context, state) {
                   return state is WeatherInitial
-                      ? SizedBox(
-                        height: MediaQuery.sizeOf(context).height - 300,
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.network(
-                                'https://img.freepik.com/free-vector/404-error-with-robot-concept-illustration_335657-2330.jpg?w=2000',
-                                width: 300,
-                                height: 300,
-                              ),
-                              const Text(
-                                'Welcome, Search For A City',
-                                style: TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const Text(
-                                'Or Use The Search Bar Above',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
+                      ? InitialStateSeachWidget()
                       : state is WeatherLoading
                       ? SizedBox(
                         height: MediaQuery.sizeOf(context).height - 200,
@@ -112,28 +86,7 @@ class _WheatherScreenState extends State<WheatherScreen> {
                         ),
                       )
                       : state is WeatherError
-                      ? SizedBox(
-                        height: MediaQuery.sizeOf(context).height - 300,
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.network(
-                                'https://img.freepik.com/free-vector/404-error-with-robot-concept-illustration_335657-2330.jpg?w=2000',
-                                width: 300,
-                                height: 300,
-                              ),
-                              const Text(
-                                'Something Went Wrong',
-                                style: TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
+                      ? SearchErrorWidget()
                       : Container();
                 },
               ),
