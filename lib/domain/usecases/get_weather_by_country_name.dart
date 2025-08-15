@@ -1,8 +1,8 @@
 import 'package:responsive_ui/domain/entities/weather_entity.dart';
-import 'package:responsive_ui/domain/repository/weather_repo.dart';
+import 'package:responsive_ui/domain/repository/weather_domain_repo.dart';
 
 class GetWeatherByCountryName {
-  final WeatherRepo weatherRepo;
+  final WeatherDomainRepo weatherRepo;
   GetWeatherByCountryName({required this.weatherRepo});
 
   Future<WeatherEntity> call({required String cityName}) async {
