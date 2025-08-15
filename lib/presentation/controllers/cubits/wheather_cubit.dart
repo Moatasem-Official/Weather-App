@@ -17,4 +17,6 @@ class WeatherCubit extends Cubit<WeatherState> {
       emit(WeatherError(e.toString()));
     }
   }
+
+  void reset() => emit(WeatherInitial());
 }

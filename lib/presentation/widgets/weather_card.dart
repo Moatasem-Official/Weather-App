@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:responsive_ui/domain/entities/weather_entity.dart';
 
 class WeatherCard extends StatelessWidget {
@@ -7,117 +6,110 @@ class WeatherCard extends StatelessWidget {
 
   const WeatherCard({super.key, required this.weatherEntity});
 
+  LinearGradient _getGradient(String condition) {
+    if (condition.contains('Cloud')) {
+      return const LinearGradient(colors: [Colors.grey, Colors.blueGrey]);
+    } else if (condition.contains('rain') || condition.contains('Rain')) {
+      return const LinearGradient(colors: [Colors.blueGrey, Colors.lightBlue]);
+    } else if (condition.contains('Snow')) {
+      return const LinearGradient(colors: [Colors.white, Colors.blueGrey]);
+    } else if (condition.contains('Clear')) {
+      return const LinearGradient(
+        colors: [Colors.blue, Colors.lightBlueAccent],
+      );
+    } else if (condition.contains('Thunder')) {
+      return const LinearGradient(colors: [Colors.black54, Colors.grey]);
+    } else if (condition.contains('Sunny')) {
+      return const LinearGradient(colors: [Colors.orange, Colors.yellow]);
+    }
+    return const LinearGradient(colors: [Colors.red, Colors.orange]);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeInOut,
       width: double.infinity,
-      height: MediaQuery.sizeOf(context).height * 0.25,
-      margin: const EdgeInsets.all(8.0),
+      height: MediaQuery.sizeOf(context).height * 0.28,
+      margin: const EdgeInsets.all(12.0),
+      padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color:
-            weatherEntity.weatherState.contains('Cloud')
-                ? Colors.grey
-                : weatherEntity.weatherState.contains('rain')
-                ? const Color.fromARGB(255, 156, 193, 223)
-                : weatherEntity.weatherState.contains('Snow')
-                ? const Color.fromARGB(255, 226, 205, 205)
-                : weatherEntity.weatherState.contains('Clear')
-                ? Colors.blue
-                : weatherEntity.weatherState.contains('Thunderstorm')
-                ? const Color.fromARGB(255, 54, 51, 51)
-                : weatherEntity.weatherState.contains('Drizzle')
-                ? Colors.purple
-                : weatherEntity.weatherState.contains('Overcast')
-                ? Colors.blueGrey
-                : weatherEntity.weatherState.contains('Thunder')
-                ? Colors.black
-                : weatherEntity.weatherState.contains('Sunny')
-                ? Colors.yellow
-                : Colors.red,
-        borderRadius: BorderRadius.circular(10),
+        gradient: _getGradient(weatherEntity.weatherState),
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.15),
+            blurRadius: 12,
+            offset: const Offset(0, 6),
+          ),
+        ],
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
+          // Location and date
           Column(
             children: [
               Text(
                 weatherEntity.areaName,
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 24,
+                  fontSize: 28,
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              const SizedBox(height: 4),
               Text(
-                weatherEntity.date,
-                style: const TextStyle(color: Colors.white, fontSize: 16),
-              ),
-              Text(
-                weatherEntity.time,
-                style: const TextStyle(color: Colors.white, fontSize: 16),
+                "${weatherEntity.date} • ${weatherEntity.time}",
+                style: const TextStyle(color: Colors.white70, fontSize: 16),
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              child: Row(
-                spacing: 20,
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Max Temp : ${weatherEntity.maxTemp.toString()} °C',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                          ),
-                        ),
-                        Text(
-                          'Min Temp : ${weatherEntity.minTemp.toString()} °C',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ],
-                    ),
+                  Text(
+                    'Max: ${weatherEntity.maxTemp}°C',
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
                   ),
-                  Expanded(child: Image.network(weatherEntity.icon)),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'AVG Temp',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                          ),
-                        ),
-                        Text(
-                          '${weatherEntity.theTemp.toString()} °C',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ],
+                  Text(
+                    'Min: ${weatherEntity.minTemp}°C',
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                ],
+              ),
+              Image.network(weatherEntity.icon, width: 80, height: 80),
+              Column(
+                children: [
+                  const Text(
+                    'Avg Temp',
+                    style: TextStyle(color: Colors.white70, fontSize: 14),
+                  ),
+                  Text(
+                    '${weatherEntity.theTemp}°C',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
               ),
-            ),
+            ],
           ),
+
           Text(
             weatherEntity.weatherState,
             style: const TextStyle(
               color: Colors.white,
-              fontSize: 24,
+              fontSize: 22,
               fontWeight: FontWeight.bold,
+              letterSpacing: 1.2,
             ),
           ),
         ],

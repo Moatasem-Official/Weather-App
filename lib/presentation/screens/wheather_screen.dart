@@ -40,9 +40,14 @@ class _WheatherScreenState extends State<WheatherScreen> {
                   hintText: 'Search for a city',
                   prefixIcon: Icon(Icons.search),
                 ),
-                onSubmitted: (searchValue) async {
-                  await (context).read<WeatherCubit>().fetchWeatherDataFromApi(
-                    cityName: searchValue.trim(),
+                onChanged: (value) async {
+                  searchValue = value.trim();
+                  if (searchValue.isEmpty) {
+                    context.read<WeatherCubit>().reset();
+                    return;
+                  }
+                  await context.read<WeatherCubit>().fetchWeatherDataFromApi(
+                    cityName: searchValue,
                   );
                 },
               ),
@@ -59,62 +64,74 @@ class _WheatherScreenState extends State<WheatherScreen> {
               BlocBuilder<WeatherCubit, WeatherState>(
                 builder: (context, state) {
                   return state is WeatherInitial
-                      ? Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.network(
-                              'https://img.freepik.com/free-vector/404-error-with-robot-concept-illustration_335657-2330.jpg?w=2000',
-                              width: 300,
-                              height: 300,
-                            ),
-                            const Text(
-                              'Welcome, Search For A City',
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
+                      ? SizedBox(
+                        height: MediaQuery.sizeOf(context).height - 300,
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.network(
+                                'https://img.freepik.com/free-vector/404-error-with-robot-concept-illustration_335657-2330.jpg?w=2000',
+                                width: 300,
+                                height: 300,
                               ),
-                            ),
-                            const Text(
-                              'Or Use The Search Bar Above',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey,
+                              const Text(
+                                'Welcome, Search For A City',
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                          ],
+                              const Text(
+                                'Or Use The Search Bar Above',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       )
                       : state is WeatherLoading
-                      ? const Center(child: CircularProgressIndicator())
+                      ? SizedBox(
+                        height: MediaQuery.sizeOf(context).height - 200,
+                        child: const Center(child: CircularProgressIndicator()),
+                      )
                       : state is WeatherLoaded
-                      ? AspectRatio(
-                        aspectRatio: 1 / 1,
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
-                          child: WeatherCard(
-                            weatherEntity: state.weatherEntity,
+                      ? SizedBox(
+                        height: MediaQuery.sizeOf(context).height - 200,
+                        child: AspectRatio(
+                          aspectRatio: 1 / 1,
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                            child: WeatherCard(
+                              weatherEntity: state.weatherEntity,
+                            ),
                           ),
                         ),
                       )
                       : state is WeatherError
-                      ? Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.network(
-                              'https://img.freepik.com/free-vector/404-error-with-robot-concept-illustration_335657-2330.jpg?w=2000',
-                              width: 300,
-                              height: 300,
-                            ),
-                            const Text(
-                              'Error',
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
+                      ? SizedBox(
+                        height: MediaQuery.sizeOf(context).height - 300,
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.network(
+                                'https://img.freepik.com/free-vector/404-error-with-robot-concept-illustration_335657-2330.jpg?w=2000',
+                                width: 300,
+                                height: 300,
                               ),
-                            ),
-                          ],
+                              const Text(
+                                'Something Went Wrong',
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       )
                       : Container();
