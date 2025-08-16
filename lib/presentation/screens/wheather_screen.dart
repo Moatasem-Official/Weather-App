@@ -23,7 +23,14 @@ class _WheatherScreenState extends State<WheatherScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         centerTitle: true,
-        title: Text('Weather'),
+        title: Text(
+          'Weather',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         toolbarHeight: 120,
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(1.0),
