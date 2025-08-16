@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:responsive_ui/domain/usecases/get_weather_by_country_name.dart';
-import 'package:responsive_ui/presentation/controllers/cubits/wheather_state.dart';
+import 'package:responsive_ui/features/weather/domain/usecases/get_weather_by_country_name.dart';
+import 'package:responsive_ui/features/weather/presentation/controllers/cubits/wheather_state.dart';
 
 class WeatherCubit extends Cubit<WeatherState> {
   final GetWeatherByCountryName getWeatherByCountryName;

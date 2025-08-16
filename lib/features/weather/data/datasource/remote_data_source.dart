@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:responsive_ui/core/utils/app_constants.dart';
-import 'package:responsive_ui/data/models/weather_model.dart';
+import 'package:responsive_ui/features/weather/data/models/weather_model.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'remote_data_source.g.dart';

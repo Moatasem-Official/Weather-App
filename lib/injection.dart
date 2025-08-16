@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:responsive_ui/data/datasource/remote_data_source.dart';
-import 'package:responsive_ui/data/repository/weather_data_repo.dart';
-import 'package:responsive_ui/domain/usecases/get_weather_by_country_name.dart';
-import 'package:responsive_ui/presentation/controllers/cubits/wheather_cubit.dart';
+import 'package:responsive_ui/features/weather/data/datasource/remote_data_source.dart';
+import 'package:responsive_ui/features/weather/data/repository/weather_data_repo.dart';
+import 'package:responsive_ui/features/weather/domain/usecases/get_weather_by_country_name.dart';
+import 'package:responsive_ui/features/weather/presentation/controllers/cubits/wheather_cubit.dart';
 
 final GetIt getIt = GetIt.instance;
 

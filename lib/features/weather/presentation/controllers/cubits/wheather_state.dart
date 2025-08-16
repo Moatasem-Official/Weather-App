@@ -1,4 +1,4 @@
-import 'package:responsive_ui/domain/entities/weather_entity.dart';
+import 'package:responsive_ui/features/weather/domain/entities/weather_entity.dart';
 
 sealed class WeatherState {}
 

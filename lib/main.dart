@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_ui/bloc_observer.dart';
-import 'package:responsive_ui/presentation/controllers/cubits/wheather_cubit.dart';
+import 'package:responsive_ui/features/weather/presentation/controllers/cubits/wheather_cubit.dart';
 import 'package:responsive_ui/injection.dart';
-import 'package:responsive_ui/presentation/screens/wheather_screen.dart';
+import 'package:responsive_ui/features/weather/presentation/screens/wheather_screen.dart';
 
 void main() {
   initInjection();
